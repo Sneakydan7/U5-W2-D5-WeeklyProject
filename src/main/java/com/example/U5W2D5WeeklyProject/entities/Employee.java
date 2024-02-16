@@ -25,6 +25,7 @@ public class Employee {
     private String name;
     private String surname;
     private String email;
+    private String image;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "employee", orphanRemoval = true)

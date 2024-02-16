@@ -19,7 +19,9 @@ public class Device {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
+    @Enumerated(EnumType.STRING)
     private DeviceType type;
+    @Enumerated(EnumType.STRING)
     private DeviceStatus status;
 
     @ManyToOne
@@ -29,6 +31,6 @@ public class Device {
 
     public Device(DeviceType type, DeviceStatus status) {
         this.type = type;
-        this.status = status;
+        this.status = DeviceStatus.AVAILABLE;
     }
 }

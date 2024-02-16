@@ -4,5 +4,5 @@ public enum DeviceStatus {
     AVAILABLE,
     ASSIGNED,
     IN_MAINTENANCE,
-    DISMISSED
+    DECOMMISSIONED
 }
