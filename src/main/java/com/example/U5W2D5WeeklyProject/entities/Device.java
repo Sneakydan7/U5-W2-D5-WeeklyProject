@@ -29,7 +29,7 @@ public class Device {
     private Employee employee;
 
 
-    public Device(DeviceType type, DeviceStatus status) {
+    public Device(DeviceType type) {
         this.type = type;
         this.status = DeviceStatus.AVAILABLE;
     }
