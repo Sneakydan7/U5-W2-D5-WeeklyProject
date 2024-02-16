@@ -7,6 +7,7 @@ import com.example.U5W2D5WeeklyProject.entities.Employee;
 import com.example.U5W2D5WeeklyProject.exceptions.UUIDNotFoundException;
 import com.example.U5W2D5WeeklyProject.payloads.EmployeeDTO;
 import com.example.U5W2D5WeeklyProject.repositories.EmployeeDAO;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,11 +37,13 @@ public class EmployeeSRV {
     }
 
     public Employee saveEmployee(EmployeeDTO newEmployee) {
-        return employeeDAO.save(new Employee(newEmployee.getName(), newEmployee.getSurname(),
-                newEmployee.getEmail(), newEmployee.getUsername()));
+        return employeeDAO.save(new Employee(newEmployee.getUsername(), newEmployee.getName(),
+                newEmployee.getSurname(), newEmployee.getEmail()));
     }
 
+
     public Employee updateEmployeeById(EmployeeDTO updatedEmployee, UUID id) {
+
         Employee found = getEmployeeById(id);
         found.setName(updatedEmployee.getName());
         found.setSurname(updatedEmployee.getSurname());

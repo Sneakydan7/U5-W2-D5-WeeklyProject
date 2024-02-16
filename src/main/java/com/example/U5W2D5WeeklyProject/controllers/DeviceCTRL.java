@@ -2,6 +2,7 @@ package com.example.U5W2D5WeeklyProject.controllers;
 
 import com.example.U5W2D5WeeklyProject.entities.Device;
 import com.example.U5W2D5WeeklyProject.entities.Employee;
+import com.example.U5W2D5WeeklyProject.payloads.AssignDTO;
 import com.example.U5W2D5WeeklyProject.payloads.DeviceDTO;
 import com.example.U5W2D5WeeklyProject.payloads.EmployeeDTO;
 import com.example.U5W2D5WeeklyProject.services.DeviceSRV;
@@ -53,5 +54,10 @@ public class DeviceCTRL {
         this.deviceSRV.deleteDevice(id);
     }
 
+    @PatchMapping("/{id}/assignDevice")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Device assignDeviceToEmployee(@PathVariable Long id, @RequestBody AssignDTO assignDTO) {
+        return this.deviceSRV.assignDeviceToEmployee(id, assignDTO);
 
+    }
 }

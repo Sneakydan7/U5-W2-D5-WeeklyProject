@@ -2,10 +2,14 @@ package com.example.U5W2D5WeeklyProject.services;
 
 import com.example.U5W2D5WeeklyProject.entities.Device;
 import com.example.U5W2D5WeeklyProject.entities.Employee;
+import com.example.U5W2D5WeeklyProject.enums.DeviceStatus;
 import com.example.U5W2D5WeeklyProject.exceptions.NotFoundException;
+import com.example.U5W2D5WeeklyProject.exceptions.UUIDNotFoundException;
+import com.example.U5W2D5WeeklyProject.payloads.AssignDTO;
 import com.example.U5W2D5WeeklyProject.payloads.DeviceDTO;
 import com.example.U5W2D5WeeklyProject.payloads.EmployeeDTO;
 import com.example.U5W2D5WeeklyProject.repositories.DeviceDAO;
+import com.example.U5W2D5WeeklyProject.repositories.EmployeeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +23,8 @@ import java.util.UUID;
 public class DeviceSRV {
     @Autowired
     private DeviceDAO deviceDAO;
+    @Autowired
+    private EmployeeDAO employeeDAO;
 
     public Page<Device> getDevices(int pageNum, int size, String orderBy) {
         if (size > 100) size = 100;
@@ -48,4 +54,13 @@ public class DeviceSRV {
         deviceDAO.delete(found);
     }
 
+    public Device assignDeviceToEmployee(Long id, AssignDTO assignDTO) {
+        Employee foundEmployee = employeeDAO.findByEmail(assignDTO.getEmail()).orElseThrow(() ->
+                new NotFoundException(id));
+        Device foundDevice = getDeviceById(id);
+        foundDevice.setStatus(DeviceStatus.ASSIGNED);
+        foundDevice.setEmployee(foundEmployee);
+
+        return deviceDAO.save(foundDevice);
+    }
 }
