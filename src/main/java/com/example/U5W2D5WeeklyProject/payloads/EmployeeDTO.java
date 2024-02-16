@@ -25,5 +25,5 @@ public class EmployeeDTO {
     @Size(min = 1, max = 40, message = "Characters must be between 1 and 40")
     String username;
 
-
+    
 }

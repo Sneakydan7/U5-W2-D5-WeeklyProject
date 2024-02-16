@@ -35,12 +35,11 @@ public class DeviceSRV {
         return deviceDAO.save(new Device(newDevice.getDeviceType()));
     }
 
-    public Device updateDeviceById(Device updatedDevice, Long id) {
+    public Device updateDeviceById(DeviceDTO updatedDevice, Long id) {
         Device found = getDeviceById(id);
-        found.setStatus(updatedDevice.getStatus());
-        found.setEmployee(updatedDevice.getEmployee());
-        found.setType(updatedDevice.getType());
-        found.setEmployee(updatedDevice.getEmployee());
+        found.setStatus(updatedDevice.getDeviceStatus());
+        found.setType(updatedDevice.getDeviceType());
+        deviceDAO.save(found);
         return found;
     }
 
