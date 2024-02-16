@@ -2,6 +2,7 @@ package com.example.U5W2D5WeeklyProject.entities;
 
 import com.example.U5W2D5WeeklyProject.enums.DeviceStatus;
 import com.example.U5W2D5WeeklyProject.enums.DeviceType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class Device {
     private DeviceType type;
     @Enumerated(EnumType.STRING)
     private DeviceStatus status;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;

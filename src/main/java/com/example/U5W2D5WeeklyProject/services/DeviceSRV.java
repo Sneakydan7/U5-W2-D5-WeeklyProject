@@ -4,7 +4,6 @@ import com.example.U5W2D5WeeklyProject.entities.Device;
 import com.example.U5W2D5WeeklyProject.entities.Employee;
 import com.example.U5W2D5WeeklyProject.enums.DeviceStatus;
 import com.example.U5W2D5WeeklyProject.exceptions.NotFoundException;
-import com.example.U5W2D5WeeklyProject.exceptions.UUIDNotFoundException;
 import com.example.U5W2D5WeeklyProject.payloads.AssignDTO;
 import com.example.U5W2D5WeeklyProject.payloads.DeviceDTO;
 import com.example.U5W2D5WeeklyProject.payloads.EmployeeDTO;
@@ -55,8 +54,7 @@ public class DeviceSRV {
     }
 
     public Device assignDeviceToEmployee(Long id, AssignDTO assignDTO) {
-        Employee foundEmployee = employeeDAO.findByEmail(assignDTO.getEmail()).orElseThrow(() ->
-                new NotFoundException(id));
+        Employee foundEmployee = employeeDAO.findByEmail(assignDTO.getEmail()).orElseThrow(() -> new RuntimeException("Employee not found"));
         Device foundDevice = getDeviceById(id);
         foundDevice.setStatus(DeviceStatus.ASSIGNED);
         foundDevice.setEmployee(foundEmployee);

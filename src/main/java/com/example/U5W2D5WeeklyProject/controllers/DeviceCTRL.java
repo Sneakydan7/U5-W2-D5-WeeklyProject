@@ -54,10 +54,9 @@ public class DeviceCTRL {
         this.deviceSRV.deleteDevice(id);
     }
 
-    @PatchMapping("/{id}/assignDevice")
+    @PutMapping("/{id}/assignDevice")
     @ResponseStatus(HttpStatus.CREATED)
     public Device assignDeviceToEmployee(@PathVariable Long id, @RequestBody AssignDTO assignDTO) {
         return this.deviceSRV.assignDeviceToEmployee(id, assignDTO);
-
     }
 }
